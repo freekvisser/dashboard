@@ -7,46 +7,121 @@ import {useState} from "react";
 const min = 1;
 const max = 2;
 
+const date: Date = new Date();
+
+
 const initialPorts: PortInfo[] = [
     {
         portNumber: 1,
         scannedTickets: 255,
-        range: "geel"
+        range: "geel",
+        trend: -9,
+        high: {
+            timestamp: date,
+            quantity: 25,
+        },
+        low: {
+            timestamp: date,
+            quantity: 1
+        }
     },
     {
         portNumber: 2,
         scannedTickets: 483,
-        range: "geel"
+        range: "geel",
+        trend: 3,
+        high: {
+            timestamp: date,
+            quantity: 25,
+        },
+        low: {
+            timestamp: date,
+            quantity: 1
+        }
     },
     {
         portNumber: 3,
         scannedTickets: 235,
-        range: "oranje"
+        range: "oranje",
+        trend: -4,
+        high: {
+            timestamp: date,
+            quantity: 25,
+        },
+        low: {
+            timestamp: date,
+            quantity: 1
+        }
     },
     {
         portNumber: 4,
         scannedTickets: 155,
-        range: "oranje"
+        range: "oranje",
+        trend: -5,
+        high: {
+            timestamp: date,
+            quantity: 25,
+        },
+        low: {
+            timestamp: date,
+            quantity: 1
+        }
     },
     {
         portNumber: 5,
         scannedTickets: 544,
-        range: "blauw"
+        range: "blauw",
+        trend: -1,
+        high: {
+            timestamp: date,
+            quantity: 25,
+        },
+        low: {
+            timestamp: date,
+            quantity: 1
+        }
     },
     {
         portNumber: 6,
         scannedTickets: 246,
-        range: "blauw"
+        range: "blauw",
+        trend: -12,
+        high: {
+            timestamp: date,
+            quantity: 25,
+        },
+        low: {
+            timestamp: date,
+            quantity: 1
+        }
     },
     {
         portNumber: 7,
         scannedTickets: 147,
-        range: "groen"
+        range: "groen",
+        trend: -15,
+        high: {
+            timestamp: date,
+            quantity: 25,
+        },
+        low: {
+            timestamp: date,
+            quantity: 1
+        }
     },
     {
         portNumber: 8,
         scannedTickets: 199,
-        range: "groen"
+        range: "groen",
+        trend: -4,
+        high: {
+            timestamp: date,
+            quantity: 25,
+        },
+        low: {
+            timestamp: date,
+            quantity: 1
+        }
     }
 ];
 
@@ -85,13 +160,11 @@ function App() {
                     <input type="checkbox" id="groen" onChange={() => handleOnChange("groen")}/>
                     <label htmlFor="groen">Groen</label>
                 </div>
-
             </div>
             <div id="content">
                 {ports.map((port, index) => {
-                    return <InfoFrame portInfo={port} key={"port" + index} className={"port"}/>
+                    return <InfoFrame portInfo={port} id={"port" + index} key={"port" + index} className="port"/>
                 })}
-                <button onClick={() => setPorts(ports.filter(port => port.portNumber >= min && port.portNumber < max))}></button>
             </div>
         </div>
     );

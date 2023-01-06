@@ -1,18 +1,28 @@
 import FrameContents from "./FrameContents";
 import { PortInfo } from "../types/PortInfo";
-import React from "react";
+import ChevronDownIcon from "../features/icons/ChevronDownIcon";
+import ChevronUpIcon from "../features/icons/ChevronUpIcon";
+import React, {useState} from "react";
 
 export interface InfoFrameProps extends React.HTMLAttributes<HTMLDivElement> {
     portInfo: PortInfo;
 }
 
 const InfoFrame = (props: InfoFrameProps) => {
-    const {portInfo, className = ''} = props;
+    const {portInfo, id, className = ''} = props;
+
+    const [open, setOpen] = useState<boolean>(false);
+
 
     return(
-        <div className={className}>
-            <span>Poort {portInfo.portNumber}</span>
-            <FrameContents scannedTickets={portInfo.scannedTickets} className={"port-content"} />
+        <div id={id} className={className} onClick={() => setOpen(!open)}>
+            <span id="port-number">Poort {portInfo.portNumber}</span>
+            <FrameContents scannedTickets={portInfo.scannedTickets} trend={portInfo.trend} high={portInfo.high} low={portInfo.low} className={"port-content"} open={open}/>
+            {open ? (
+                <ChevronUpIcon className="chevron" onClick={() => setOpen(!open)} />
+            ) : (
+                <ChevronDownIcon className="chevron" onClick={() => setOpen(!open)} />
+            )}
         </div>
     )
 }
