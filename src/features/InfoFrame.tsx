@@ -1,23 +1,18 @@
-import React from 'react';
+import FrameContents from "./FrameContents";
+import { PortInfo } from "../types/PortInfo";
+import React from "react";
 
-export interface InfoFrameProps {
-    portNumber: number;
-    scannedTickets: number;
+export interface InfoFrameProps extends React.HTMLAttributes<HTMLDivElement> {
+    portInfo: PortInfo;
 }
 
 const InfoFrame = (props: InfoFrameProps) => {
-    const {
-        portNumber,
-        scannedTickets,
-    } = props;
-
+    const {portInfo, className = ''} = props;
 
     return(
-        <div>
-            <span>Poort {portNumber}</span>
-            <div>
-                <span>{scannedTickets} <br/> gescande tickets</span>
-            </div>
+        <div className={className}>
+            <span>Poort {portInfo.portNumber}</span>
+            <FrameContents scannedTickets={portInfo.scannedTickets} className={"port-content"} />
         </div>
     )
 }
