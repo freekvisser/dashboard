@@ -15,7 +15,7 @@ const InfoFrame = (props: InfoFrameProps) => {
 
 
     return(
-        <div id={id} className={className} onClick={() => setOpen(!open)}>
+        <div id={id} className={className + (portInfo.hide ? ' hidden' : '')} onClick={() => setOpen(!open)}>
             <span id="port-number">Poort {portInfo.portNumber}</span>
             <FrameContents scannedTickets={portInfo.scannedTickets} trend={portInfo.trend} high={portInfo.high} low={portInfo.low} className={"port-content"} open={open}/>
             {open ? (

@@ -11,5 +11,5 @@ export interface PortInfo{
         timestamp: Date;
         quantity: number;
     }
-
+    hide: boolean;
 }

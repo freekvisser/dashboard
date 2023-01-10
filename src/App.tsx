@@ -3,10 +3,6 @@ import InfoFrame from "./features/InfoFrame"
 import { PortInfo } from "./types/PortInfo"
 import {useState} from "react";
 
-
-const min = 1;
-const max = 2;
-
 const date: Date = new Date();
 
 
@@ -23,7 +19,8 @@ const initialPorts: PortInfo[] = [
         low: {
             timestamp: date,
             quantity: 1
-        }
+        },
+        hide: false,
     },
     {
         portNumber: 2,
@@ -37,7 +34,8 @@ const initialPorts: PortInfo[] = [
         low: {
             timestamp: date,
             quantity: 1
-        }
+        },
+        hide: false,
     },
     {
         portNumber: 3,
@@ -51,7 +49,8 @@ const initialPorts: PortInfo[] = [
         low: {
             timestamp: date,
             quantity: 1
-        }
+        },
+        hide: false,
     },
     {
         portNumber: 4,
@@ -65,7 +64,8 @@ const initialPorts: PortInfo[] = [
         low: {
             timestamp: date,
             quantity: 1
-        }
+        },
+        hide: false,
     },
     {
         portNumber: 5,
@@ -79,7 +79,8 @@ const initialPorts: PortInfo[] = [
         low: {
             timestamp: date,
             quantity: 1
-        }
+        },
+        hide: false,
     },
     {
         portNumber: 6,
@@ -93,7 +94,8 @@ const initialPorts: PortInfo[] = [
         low: {
             timestamp: date,
             quantity: 1
-        }
+        },
+        hide: false,
     },
     {
         portNumber: 7,
@@ -107,7 +109,8 @@ const initialPorts: PortInfo[] = [
         low: {
             timestamp: date,
             quantity: 1
-        }
+        },
+        hide: false,
     },
     {
         portNumber: 8,
@@ -121,7 +124,8 @@ const initialPorts: PortInfo[] = [
         low: {
             timestamp: date,
             quantity: 1
-        }
+        },
+        hide: false,
     }
 ];
 
@@ -139,7 +143,7 @@ function App() {
         //remove the clicked side if already in the list, otherwise add it
         updatedSides = updatedSides.includes(clickedSide) ? updatedSides.filter(side => side !== clickedSide) : [...updatedSides, clickedSide]
         //if at least one side is selected for filtering, filter ports accordingly
-        updatedSides.length !== 0 && (updatedPorts = updatedPorts.filter(port => updatedSides.includes(port.range)));
+        updatedSides.length !== 0 ? updatedPorts.map(port => updatedSides.includes(port.range) ? port.hide = false : port.hide = true) : updatedPorts.map(port => port.hide = false);
 
         //set the states to updated arrays
         setSides(updatedSides)
@@ -163,7 +167,7 @@ function App() {
             </div>
             <div id="content">
                 {ports.map((port, index) => {
-                    return <InfoFrame portInfo={port} id={"port" + index} key={"port" + index} className="port"/>
+                    return <InfoFrame portInfo={port} id={"port" + index} key={"port" + index} className="port" />
                 })}
             </div>
         </div>
