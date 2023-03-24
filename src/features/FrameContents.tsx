@@ -1,22 +1,13 @@
 import React, {useState} from 'react';
-import { ticketInfo } from '../types/ticketInfo'
-
-export interface FrameContents extends React.HTMLAttributes<HTMLDivElement>, ticketInfo {
-    portNumber: number;
-    open: boolean;
-    types: ticketInfo[]
-}
+import { FrameInfo } from '../types/FrameInfo'
+import { Trend } from './Trend'
 
 
-const FrameContents = (props: FrameContents) => {
+const FrameContents = (props: FrameInfo) => {
     const {
         portNumber,
-        scannedTickets,
-        trend,
-        high,
-        low,
         open,
-        types,
+        info,
         className,
     } = props;
 
@@ -36,23 +27,27 @@ const FrameContents = (props: FrameContents) => {
                     <span id="scanned-tickets">{ticketTypes[index]}</span><br/>
                     <span>gescande tickets</span>
                 </div>
-                <h2>{types[index].scannedTickets}</h2>
+                <h2>{info[index].scannedTickets}</h2>
             </div>
             {open && (
                 <>
                     <div className="frame-sections">
-                        <span className="trend" id={types[index].trend < 0 ? "neg-trend" : "pos-trend"}>{types[index].trend + "%"}</span><br/>
+                        <span className="trend" id={info[index].trend < 0 ? "neg-trend" : "pos-trend"}>{info[index].trend + "%"}</span><br/>
                         <span>T.o.v. laatste wedstrijd</span>
                     </div>
                     <div className="frame-sections">
-                        <span className={"high-low"}>{types[index].high.timestamp.getHours() + ":" + types[index].high.timestamp.getMinutes().toString().padStart(2, '0') + " (" + types[index].high.quantity + ")"}</span><br/>
+                        <span className={"high-low"}>{info[index].high.timestamp.getHours() + ":" + info[index].high.timestamp.getMinutes().toString().padStart(2, '0') + " (" + info[index].high.quantity + ")"}</span><br/>
                         <span>Piek</span><br/>
-                        <span className={"high-low"}>{types[index].low.timestamp.getHours() + ":" + types[index].low.timestamp.getMinutes().toString().padStart(2, '0') + " (" + types[index].low.quantity + ")"}</span><br/>
+                        <span className={"high-low"}>{info[index].low.timestamp.getHours() + ":" + info[index].low.timestamp.getMinutes().toString().padStart(2, '0') + " (" + info[index].low.quantity + ")"}</span><br/>
                         <span>Dal</span>
                     </div>
 
+                    <div className="frame-sections">
+                        <Trend history={info[index].history} />
+                    </div>
+
                     <div className="bottom-bar">
-                        {types.map((type, i) => {
+                        {info.map((type, i) => {
                             return (
                                 <div
                                     className="type-button"

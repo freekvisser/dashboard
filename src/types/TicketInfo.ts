@@ -1,4 +1,4 @@
-export interface ticketInfo {
+export interface TicketInfo {
     scannedTickets: number;
     trend: number;
     high: {
@@ -9,4 +9,9 @@ export interface ticketInfo {
         timestamp: Date;
         quantity: number;
     }
+    history:
+                {
+                    date: Date;
+                    value: number;
+                }[]
 }

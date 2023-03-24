@@ -21,6 +21,21 @@ const initialPorts: PortInfo[] = [
             quantity: 1
         },
         hide: false,
+        history: [
+            {
+                date: new Date(1679649878 * 1000),
+                value: 109
+            },
+            {
+                date: new Date(1679649578 * 1000),
+                value: 189
+            },
+            {
+                date: new Date(1679649378 * 1000),
+                value: 59
+            }
+
+        ]
     },
     {
         portNumber: 2,
@@ -36,6 +51,21 @@ const initialPorts: PortInfo[] = [
             quantity: 1
         },
         hide: false,
+        history: [
+            {
+                date: new Date(1679649878 * 1000),
+                value: 109
+            },
+            {
+                date: new Date(1679649578 * 1000),
+                value: 189
+            },
+            {
+                date: new Date(1679649378 * 1000),
+                value: 59
+            }
+
+        ]
     },
     {
         portNumber: 3,
@@ -51,6 +81,21 @@ const initialPorts: PortInfo[] = [
             quantity: 1
         },
         hide: false,
+        history: [
+            {
+                date: new Date(1679649878 * 1000),
+                value: 109
+            },
+            {
+                date: new Date(1679649578 * 1000),
+                value: 189
+            },
+            {
+                date: new Date(1679649378 * 1000),
+                value: 59
+            }
+
+        ]
     },
     {
         portNumber: 4,
@@ -66,6 +111,21 @@ const initialPorts: PortInfo[] = [
             quantity: 1
         },
         hide: false,
+        history: [
+            {
+                date: new Date(1679649878 * 1000),
+                value: 109
+            },
+            {
+                date: new Date(1679649578 * 1000),
+                value: 189
+            },
+            {
+                date: new Date(1679649378 * 1000),
+                value: 59
+            }
+
+        ]
     },
     {
         portNumber: 5,
@@ -81,6 +141,21 @@ const initialPorts: PortInfo[] = [
             quantity: 1
         },
         hide: false,
+        history: [
+            {
+                date: new Date(1679649878 * 1000),
+                value: 109
+            },
+            {
+                date: new Date(1679649578 * 1000),
+                value: 189
+            },
+            {
+                date: new Date(1679649378 * 1000),
+                value: 59
+            }
+
+        ]
     },
     {
         portNumber: 6,
@@ -96,6 +171,21 @@ const initialPorts: PortInfo[] = [
             quantity: 1
         },
         hide: false,
+        history: [
+            {
+                date: new Date(1679649878 * 1000),
+                value: 109
+            },
+            {
+                date: new Date(1679649578 * 1000),
+                value: 189
+            },
+            {
+                date: new Date(1679649378 * 1000),
+                value: 59
+            }
+
+        ]
     },
     {
         portNumber: 7,
@@ -111,6 +201,21 @@ const initialPorts: PortInfo[] = [
             quantity: 1
         },
         hide: false,
+        history: [
+            {
+                date: new Date(1679649878 * 1000),
+                value: 109
+            },
+            {
+                date: new Date(1679649578 * 1000),
+                value: 189
+            },
+            {
+                date: new Date(1679649378 * 1000),
+                value: 59
+            }
+
+        ]
     },
     {
         portNumber: 8,
@@ -126,6 +231,21 @@ const initialPorts: PortInfo[] = [
             quantity: 1
         },
         hide: false,
+        history: [
+            {
+                date: new Date(1679649878 * 1000),
+                value: 109
+            },
+            {
+                date: new Date(1679649578 * 1000),
+                value: 189
+            },
+            {
+                date: new Date(1679649378 * 1000),
+                value: 59
+            }
+
+        ]
     }
 ];
 

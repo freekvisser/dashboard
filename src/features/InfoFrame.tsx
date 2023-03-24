@@ -3,7 +3,7 @@ import { PortInfo } from "../types/PortInfo";
 import ChevronDownIcon from "../features/icons/ChevronDownIcon";
 import ChevronUpIcon from "../features/icons/ChevronUpIcon";
 import React, {useState} from "react";
-import {ticketInfo} from "../types/ticketInfo";
+import {TicketInfo} from "../types/TicketInfo";
 
 export interface InfoFrameProps extends React.HTMLAttributes<HTMLDivElement> {
     portInfo: PortInfo;
@@ -12,12 +12,13 @@ export interface InfoFrameProps extends React.HTMLAttributes<HTMLDivElement> {
 const InfoFrame = (props: InfoFrameProps) => {
     const {portInfo, id, className = ''} = props;
 
-    const ticketInfos : ticketInfo[] = [
+    const ticketInfos : TicketInfo[] = [
         {
             scannedTickets: portInfo.scannedTickets,
             trend: portInfo.trend,
             high: portInfo.high,
             low: portInfo.low,
+            history: portInfo.history
         },
         {
             scannedTickets: 402,
@@ -29,7 +30,22 @@ const InfoFrame = (props: InfoFrameProps) => {
             low: {
                 timestamp: new Date(1679649878 * 1000),
                 quantity: 12,
-            }
+            },
+            history: [
+                        {
+                            date: new Date(1679649878 * 1000),
+                            value: 109
+                        },
+                        {
+                            date: new Date(1679649578 * 1000),
+                            value: 189
+                        },
+                        {
+                            date: new Date(1679649378 * 1000),
+                            value: 59
+                        }
+
+            ]
         },
         {
             scannedTickets: 412,
@@ -41,7 +57,22 @@ const InfoFrame = (props: InfoFrameProps) => {
             low: {
                 timestamp: new Date(1679649878 * 1000),
                 quantity: 12,
-            }
+            },
+            history: [
+                {
+                    date: new Date(1679649878 * 1000),
+                    value: 109
+                },
+                {
+                    date: new Date(1679649578 * 1000),
+                    value: 189
+                },
+                {
+                    date: new Date(1679649378 * 1000),
+                    value: 59
+                }
+
+            ]
         },
         {
             scannedTickets: 349,
@@ -53,7 +84,22 @@ const InfoFrame = (props: InfoFrameProps) => {
             low: {
                 timestamp: new Date(1679649878 * 1000),
                 quantity: 12,
-            }
+            },
+            history: [
+                {
+                    date: new Date(1679649878 * 1000),
+                    value: 109
+                },
+                {
+                    date: new Date(1679649578 * 1000),
+                    value: 190
+                },
+                {
+                    date: new Date(1679649378 * 1000),
+                    value: 59
+                }
+
+            ]
         },
     ]
 
@@ -62,7 +108,7 @@ const InfoFrame = (props: InfoFrameProps) => {
 
     return(
         <div id={id} className={className + (portInfo.hide ? ' hidden' : '')}>
-            <FrameContents portNumber={portInfo.portNumber} scannedTickets={portInfo.scannedTickets} trend={portInfo.trend} high={portInfo.high} low={portInfo.low} open={open} types={ticketInfos} className={"port-content"}/>
+            <FrameContents portNumber={portInfo.portNumber} open={open} info={ticketInfos} className={"port-content"}/>
             {open ? (
                 <ChevronUpIcon className="chevron" onClick={() => setOpen(!open)} />
             ) : (
