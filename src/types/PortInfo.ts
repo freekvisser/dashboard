@@ -1,15 +1,7 @@
-export interface PortInfo{
+import { ticketInfo } from './ticketInfo'
+
+export interface PortInfo extends ticketInfo{
     portNumber: number;
-    scannedTickets: number;
     range: string;
-    trend: number;
-    high: {
-        timestamp: Date;
-        quantity: number;
-    };
-    low: {
-        timestamp: Date;
-        quantity: number;
-    }
     hide: boolean;
 }

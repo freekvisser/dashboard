@@ -1,5 +1,7 @@
 body{
-  background-color: #ff0000;
+  background-color: #262626;
+  font-family: Helvetica Neue, serif;
+  font-weight: bold;
 }
 
 .hidden{
@@ -16,6 +18,7 @@ body{
   top: 0;
   left: 0;
   background-color: #000;
+  font-weight: normal;
 }
   #port-filter{
     width: 100%;
@@ -35,18 +38,11 @@ body{
 }
 .port{
   width: 30%;
-}
-#port-number{
-  display: block;
-  color: #fff;
-  padding: 1rem 0;
-  font-size: 20px;
-  font-weight: bold;
+  margin: 3rem 0;
 }
 .port-content{
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(255, 255, 255, 0.9);
   color: #fff;
-  padding: 3rem;
   position: relative;
 }
 .port-content:before {
@@ -54,19 +50,35 @@ body{
   position: absolute;
   bottom: 0;
   right: 0;
-  border-bottom: 60px solid red;
+  border-bottom: 60px solid #262626;
   border-left: 60px solid transparent;
   width: 0;
 }
-  .frame-sections:not(:last-child){
-    margin-bottom: 1rem;
+  .mask{
+    background-color: #fff;
+  }
+  .title{
+    padding: .5rem 0;
+    background-color: rgba(255, 0, 0, 0.8);
+    text-align: center;
+  }
+  .frame-sections{
+    padding: 1rem 3rem;
+  }
+  #sub-title{
+    display: flex;
+  }
+  .frame-sections h2{
+    width: 100%;
+    text-align: right;
+    color: #000;
   }
    span{
      color: #B0B0B0;
   }
   .port-content #scanned-tickets{
     font-size: 25px;
-    color: #fff;
+    color: #000;
     padding-bottom: 16px;
   }
   .port-content .trend{
@@ -81,12 +93,28 @@ body{
 
   .high-low{
     font-size: 25px;
-    color: #ffffff;
+    color: #000;
+  }
+
+  .bottom-bar{
+    text-align: center;
+  }
+  .type-button{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 1rem 1rem;
+  }
+  .type-button:hover{
+    background-color: #000;
   }
 
 .chevron{
   width: 100%;
   height: 50px;
   margin: 0 auto;
-  transition: .5s
+  transition: .5s;
+  color: rgba(255, 255, 255, 0.7);
 }
