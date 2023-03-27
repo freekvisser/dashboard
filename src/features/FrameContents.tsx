@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { FrameInfo } from '../types/FrameInfo'
 import { Trend } from './Trend'
+import { Graph } from './Graph'
 
 
 const FrameContents = (props: FrameInfo) => {
@@ -31,6 +32,7 @@ const FrameContents = (props: FrameInfo) => {
             </div>
             {open && (
                 <>
+                    <Graph history={info[index].history}/>
                     <div className="frame-sections">
                         <span className="trend" id={info[index].trend < 0 ? "neg-trend" : "pos-trend"}>{info[index].trend + "%"}</span><br/>
                         <span>T.o.v. laatste wedstrijd</span>

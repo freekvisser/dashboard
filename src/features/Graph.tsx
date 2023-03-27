@@ -1,38 +1,58 @@
-import {round} from "colord/helpers";
+import React from 'react';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 
-interface graphProps {
-    history: {
-        date: Date;
-        value: number;
-    }[]
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
-}
+export const options = {
+    responsive: true,
+    plugins: {
+        legend: {
+            display: false,
+        },
+    },
+};
 
-export const Graph = (props: graphProps)  => {
+export const Graph = (props) => {
     const { history } = props;
+    const labels = [];
+    const values = [];
 
-    return(
-        <div>
-            <table>
-                <tr>
-                    <th>Datum</th>
-                    <th>Gescand</th>
-                    <th>Verschil</th>
-                    <th>%</th>
-                </tr>
-            {history.map((match, index) => {
-                return (
-                    <>
-                        <tr>
-                            <td>{match.date.getDay() + "-" + (match.date.getMonth() + index)}</td>
-                            <td>{match.value}</td>
-                            <td>{history[index + 1] != null && match.value - history[index + 1].value}</td>
-                            <td>{history[index + 1] != null && Math.round((((match.value - history[index + 1].value) / match.value)) * 100) + "%"}</td>
-                        </tr>
-                    </>
-                )
-            })}
-            </table>
-        </div>
-    )
+    history.map((match, index) => {
+        labels.push(match.date.getDay() + "-" + (match.date.getMonth() + index));
+        values.push(match.value);
+    })
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Dataset 1',
+                data: values,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            },
+        ],
+    };
+
+    console.log(labels, values)
+
+    return <Line options={options} data={data} />;
 }
