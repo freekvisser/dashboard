@@ -1,11 +1,11 @@
 import './App.css';
 import InfoFrame from "./features/InfoFrame"
 import { PortInfo } from "./types/PortInfo"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const date: Date = new Date();
 
-
+/*
 const initialPorts: PortInfo[] = [
     {
         portNumber: 1,
@@ -248,17 +248,102 @@ const initialPorts: PortInfo[] = [
         ]
     }
 ];
+*/
+
+const preDBset = [
+    {
+        portNumber: 1,
+        scannedTickets: 255,
+        range: "geel",
+        hide: false,
+    },
+    {
+        portNumber: 2,
+        scannedTickets: 483,
+        range: "geel",
+        hide: false,
+    },
+    {
+        portNumber: 3,
+        scannedTickets: 235,
+        range: "oranje",
+        hide: false,
+    },
+    {
+        portNumber: 4,
+        scannedTickets: 155,
+        range: "oranje",
+        hide: false,
+    },
+    {
+        portNumber: 5,
+        scannedTickets: 544,
+        range: "blauw",
+        hide: false,
+    },
+    {
+        portNumber: 6,
+        scannedTickets: 246,
+        range: "blauw",
+        hide: false,
+    },
+    {
+        portNumber: 7,
+        scannedTickets: 255,
+        range: "groen",
+        hide: false,
+    },
+    {
+        portNumber: 8,
+        scannedTickets: 255,
+        range: "groen",
+        hide: false,
+    },
+]
+
+const dbGeneratedSet = [];
 
 
 function App() {
-    const [ports, setPorts] = useState<PortInfo[]>(initialPorts);
+    const [ports, setPorts] = useState([]);
     const [sides, setSides] = useState<string[]>([]);
+
+    const tempPorts = [];
+
+    const nrOfPorts = 8;
+
+    function getPortData(){
+        fetch('/getAllPortData.php')
+            .then((response) => response.json())
+            .then((data) => {
+                data.map((port, index) => {
+                    port["portNumber"] = index + 1;
+                    port["hide"] = false;
+                })
+                setPorts(data)
+            })
+            .catch((err) => {
+                console.log(err.message);
+            })
+    }
+
+    useEffect(() => {
+        getPortData();
+        const intervalId = setInterval(
+            () => {
+                getPortData();
+            }
+            , 10000)
+        return(() => {
+            clearInterval(intervalId)
+        })
+    }, [])
 
     const handleOnChange = (clickedSide) => {
 
         //create arrays to edit sides and ports
         let updatedSides = sides;
-        let updatedPorts = initialPorts;
+        let updatedPorts = ports;
 
         //remove the clicked side if already in the list, otherwise add it
         updatedSides = updatedSides.includes(clickedSide) ? updatedSides.filter(side => side !== clickedSide) : [...updatedSides, clickedSide]
@@ -288,7 +373,8 @@ function App() {
             <div id="content">
                 {ports.map((port, index) => {
                     return <InfoFrame portInfo={port} id={"port" + index} key={"port" + index} className="port" />
-                })}
+                })
+                }
             </div>
         </div>
     );

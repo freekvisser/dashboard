@@ -30,14 +30,21 @@ export const options = {
     },
 };
 
-export const Graph = (props) => {
+interface GraphProps{
+    history: {
+        date: string,
+        quantity: number;
+    }[]
+}
+
+export const Graph = (props: GraphProps) => {
     const { history } = props;
     const labels = [];
     const values = [];
 
     history.map((match, index) => {
-        labels.push(match.date.getDay() + "-" + (match.date.getMonth() + index));
-        values.push(match.value);
+        labels.push(match.date);
+        values.push(match.quantity);
     })
 
     const data = {
@@ -51,8 +58,6 @@ export const Graph = (props) => {
             },
         ],
     };
-
-    console.log(labels, values)
 
     return <Line options={options} data={data} />;
 }

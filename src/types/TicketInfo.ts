@@ -2,16 +2,16 @@ export interface TicketInfo {
     scannedTickets: number;
     trend: number;
     high: {
-        timestamp: Date;
+        timestamp: string;
         quantity: number;
     },
     low: {
-        timestamp: Date;
+        timestamp: string;
         quantity: number;
     }
     history:
                 {
-                    date: Date;
-                    value: number;
+                    date: string;
+                    quantity: number;
                 }[]
 }

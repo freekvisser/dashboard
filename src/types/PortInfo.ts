@@ -1,7 +1,6 @@
-import { TicketInfo } from './TicketInfo'
-
-export interface PortInfo extends TicketInfo{
+export interface PortInfo{
     portNumber: number;
     range: string;
+    scannedTickets: number;
     hide: boolean;
 }
