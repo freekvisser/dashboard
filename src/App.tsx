@@ -1,326 +1,26 @@
 import './App.css';
 import InfoFrame from "./features/InfoFrame"
-import { PortInfo } from "./types/PortInfo"
 import {useEffect, useState} from "react";
-
-const date: Date = new Date();
-
-/*
-const initialPorts: PortInfo[] = [
-    {
-        portNumber: 1,
-        scannedTickets: 255,
-        range: "geel",
-        trend: -9,
-        high: {
-            timestamp: date,
-            quantity: 25,
-        },
-        low: {
-            timestamp: date,
-            quantity: 1
-        },
-        hide: false,
-        history: [
-            {
-                date: new Date(1679649878 * 1000),
-                value: 109
-            },
-            {
-                date: new Date(1679649578 * 1000),
-                value: 189
-            },
-            {
-                date: new Date(1679649378 * 1000),
-                value: 59
-            }
-
-        ]
-    },
-    {
-        portNumber: 2,
-        scannedTickets: 483,
-        range: "geel",
-        trend: 3,
-        high: {
-            timestamp: date,
-            quantity: 25,
-        },
-        low: {
-            timestamp: date,
-            quantity: 1
-        },
-        hide: false,
-        history: [
-            {
-                date: new Date(1679649878 * 1000),
-                value: 109
-            },
-            {
-                date: new Date(1679649578 * 1000),
-                value: 189
-            },
-            {
-                date: new Date(1679649378 * 1000),
-                value: 59
-            }
-
-        ]
-    },
-    {
-        portNumber: 3,
-        scannedTickets: 235,
-        range: "oranje",
-        trend: -4,
-        high: {
-            timestamp: date,
-            quantity: 25,
-        },
-        low: {
-            timestamp: date,
-            quantity: 1
-        },
-        hide: false,
-        history: [
-            {
-                date: new Date(1679649878 * 1000),
-                value: 109
-            },
-            {
-                date: new Date(1679649578 * 1000),
-                value: 189
-            },
-            {
-                date: new Date(1679649378 * 1000),
-                value: 59
-            }
-
-        ]
-    },
-    {
-        portNumber: 4,
-        scannedTickets: 155,
-        range: "oranje",
-        trend: -5,
-        high: {
-            timestamp: date,
-            quantity: 25,
-        },
-        low: {
-            timestamp: date,
-            quantity: 1
-        },
-        hide: false,
-        history: [
-            {
-                date: new Date(1679649878 * 1000),
-                value: 109
-            },
-            {
-                date: new Date(1679649578 * 1000),
-                value: 189
-            },
-            {
-                date: new Date(1679649378 * 1000),
-                value: 59
-            }
-
-        ]
-    },
-    {
-        portNumber: 5,
-        scannedTickets: 544,
-        range: "blauw",
-        trend: -1,
-        high: {
-            timestamp: date,
-            quantity: 25,
-        },
-        low: {
-            timestamp: date,
-            quantity: 1
-        },
-        hide: false,
-        history: [
-            {
-                date: new Date(1679649878 * 1000),
-                value: 109
-            },
-            {
-                date: new Date(1679649578 * 1000),
-                value: 189
-            },
-            {
-                date: new Date(1679649378 * 1000),
-                value: 59
-            }
-
-        ]
-    },
-    {
-        portNumber: 6,
-        scannedTickets: 246,
-        range: "blauw",
-        trend: -12,
-        high: {
-            timestamp: date,
-            quantity: 25,
-        },
-        low: {
-            timestamp: date,
-            quantity: 1
-        },
-        hide: false,
-        history: [
-            {
-                date: new Date(1679649878 * 1000),
-                value: 109
-            },
-            {
-                date: new Date(1679649578 * 1000),
-                value: 189
-            },
-            {
-                date: new Date(1679649378 * 1000),
-                value: 59
-            }
-
-        ]
-    },
-    {
-        portNumber: 7,
-        scannedTickets: 147,
-        range: "groen",
-        trend: -15,
-        high: {
-            timestamp: date,
-            quantity: 25,
-        },
-        low: {
-            timestamp: date,
-            quantity: 1
-        },
-        hide: false,
-        history: [
-            {
-                date: new Date(1679649878 * 1000),
-                value: 109
-            },
-            {
-                date: new Date(1679649578 * 1000),
-                value: 189
-            },
-            {
-                date: new Date(1679649378 * 1000),
-                value: 59
-            }
-
-        ]
-    },
-    {
-        portNumber: 8,
-        scannedTickets: 199,
-        range: "groen",
-        trend: -4,
-        high: {
-            timestamp: date,
-            quantity: 25,
-        },
-        low: {
-            timestamp: date,
-            quantity: 1
-        },
-        hide: false,
-        history: [
-            {
-                date: new Date(1679649878 * 1000),
-                value: 109
-            },
-            {
-                date: new Date(1679649578 * 1000),
-                value: 189
-            },
-            {
-                date: new Date(1679649378 * 1000),
-                value: 59
-            }
-
-        ]
-    }
-];
-*/
-
-const preDBset = [
-    {
-        portNumber: 1,
-        scannedTickets: 255,
-        range: "geel",
-        hide: false,
-    },
-    {
-        portNumber: 2,
-        scannedTickets: 483,
-        range: "geel",
-        hide: false,
-    },
-    {
-        portNumber: 3,
-        scannedTickets: 235,
-        range: "oranje",
-        hide: false,
-    },
-    {
-        portNumber: 4,
-        scannedTickets: 155,
-        range: "oranje",
-        hide: false,
-    },
-    {
-        portNumber: 5,
-        scannedTickets: 544,
-        range: "blauw",
-        hide: false,
-    },
-    {
-        portNumber: 6,
-        scannedTickets: 246,
-        range: "blauw",
-        hide: false,
-    },
-    {
-        portNumber: 7,
-        scannedTickets: 255,
-        range: "groen",
-        hide: false,
-    },
-    {
-        portNumber: 8,
-        scannedTickets: 255,
-        range: "groen",
-        hide: false,
-    },
-]
-
-const dbGeneratedSet = [];
-
+import Circle from "./features/icons/Circle";
 
 function App() {
     const [ports, setPorts] = useState([]);
     const [sides, setSides] = useState<string[]>([]);
 
-    const tempPorts = [];
-
-    const nrOfPorts = 8;
-
     function getPortData(){
         fetch('/getAllPortData.php')
             .then((response) => response.json())
             .then((data) => {
-                data.map((port, index) => {
-                    port["portNumber"] = index + 1;
-                    port["hide"] = false;
+                data.map((port) => {
+                    if(sides.length > 0){
+                        port["hide"] = !sides.includes(port.range);
+                    }
+                    else{
+                        port["hide"] = false;
+                    }
                 })
                 setPorts(data)
+                return data; // Return the data fetched from the API
             })
             .catch((err) => {
                 console.log(err.message);
@@ -328,16 +28,8 @@ function App() {
     }
 
     useEffect(() => {
-        getPortData();
-        const intervalId = setInterval(
-            () => {
-                getPortData();
-            }
-            , 10000)
-        return(() => {
-            clearInterval(intervalId)
-        })
-    }, [])
+        getPortData()
+    }, [sides])
 
     const handleOnChange = (clickedSide) => {
 
@@ -360,14 +52,35 @@ function App() {
         <div id="container">
             <div id="sidebar">
                 <div id="port-filter">
-                    <input type="checkbox" id="geel" onChange={() => handleOnChange("geel")}/>
-                    <label htmlFor="geel">Geel</label><br/>
-                    <input type="checkbox" id="oranje" onChange={() => handleOnChange("oranje")}/>
-                    <label htmlFor="oranje">Oranje</label><br/>
-                    <input type="checkbox" id="blauw" onChange={() => handleOnChange("blauw")}/>
-                    <label htmlFor="blauw">Blauw</label><br/>
-                    <input type="checkbox" id="groen" onChange={() => handleOnChange("groen")}/>
-                    <label htmlFor="groen">Groen</label>
+                    <span>Filter op zijde(s)</span>
+                    <div className="checkbox-container" onClick={(e: React.MouseEvent<Element>) => {
+                        e.currentTarget.classList.toggle('checked');
+                        handleOnChange("geel");
+                    }}>
+                        <label htmlFor="geel">Geel</label>
+                        <Circle id="geel"/>
+                    </div>
+                    <div className="checkbox-container" onClick={(e: React.MouseEvent<Element>) => {
+                        e.currentTarget.classList.toggle('checked');
+                        handleOnChange("oranje");
+                    }}>
+                        <label htmlFor="oranje">Oranje</label>
+                        <Circle id="oranje"/>
+                    </div>
+                    <div className="checkbox-container" onClick={(e: React.MouseEvent<Element>) => {
+                        e.currentTarget.classList.toggle('checked');
+                        handleOnChange("blauw");
+                    }}>
+                        <label htmlFor="blauw">Blauw</label>
+                        <Circle id="blauw"/>
+                    </div>
+                    <div className="checkbox-container" onClick={(e: React.MouseEvent<Element>) => {
+                        e.currentTarget.classList.toggle('checked');
+                        handleOnChange("groen");
+                    }}>
+                        <label htmlFor="groen">Groen</label>
+                        <Circle id="groen"/>
+                    </div>
                 </div>
             </div>
             <div id="content">

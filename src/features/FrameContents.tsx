@@ -14,7 +14,7 @@ const FrameContents = (props: FrameInfo) => {
     } = props;
 
     const [index, setIndex] = useState(0)
-
+    const [ticketsPerType, setTicketPerType] = useState(scannedTickets)
     const [highLow, setHighLow] = useState({
         high: { timestamp: "", quantity: 0 },
         low: { timestamp: "", quantity: 0 }
@@ -43,17 +43,42 @@ const FrameContents = (props: FrameInfo) => {
             })
     }
 
+    function getScannedTickets() {
+        fetch('/getScannedTickets.php?portId=' + portNumber + '&index=' + index)
+            .then((response) => response.json())
+            .then((data) => {
+                setTicketPerType(data)
+            })
+            .catch((err) => {
+                console.log(err.message);
+            })
+    }
+
     useEffect(() => {
-        if(open) {
+        getScannedTickets();
+        if (open) {
             getHighLow();
             getHistory();
+        }
+        else{
             const intervalId = setInterval(
                 () => {
+                    getScannedTickets();
+                }
+                , 1000)
+            return (() => {
+                clearInterval(intervalId)
+            })
+        }
+        if (open){
+            const intervalId = setInterval(
+                () => {
+                    getScannedTickets();
                     getHighLow();
                     getHistory();
                 }
-                , 10000)
-            return(() => {
+                , 1000)
+            return (() => {
                 clearInterval(intervalId)
             })
         }
@@ -73,7 +98,7 @@ const FrameContents = (props: FrameInfo) => {
             history: history
         }
 
-    const ticketTypes = ['Totaal', "Mobile", "E-ticket", "Hardcard"]
+    const ticketTypes = ['Totaal', "E-ticket", "Hardcard", "Mobiel"]
 
     return(
         <div className={className}>
@@ -84,24 +109,30 @@ const FrameContents = (props: FrameInfo) => {
             </div>
             <div className="frame-sections" id="sub-title">
                 <div>
-                    <span id="scanned-tickets">{scannedTickets}</span><br/>
+                    <span id="scanned-tickets">{ticketTypes[index]}</span><br/>
                     <span>gescande tickets</span>
                 </div>
-                <h2>{info.scannedTickets}</h2>
+                <h2>{ticketsPerType}</h2>
             </div>
             {open && (
                 <>
-                    <Graph history={info.history}/>
                     <div className="frame-sections">
-                        <span className="trend" id={info.trend < 0 ? "neg-trend" : "pos-trend"}>{info.trend + "%"}</span><br/>
-                        <span>T.o.v. laatste wedstrijd</span>
-                    </div>
-                    <div className="frame-sections">
-                        <span className={"high-low"}>{highLow.high.timestamp + " (" + highLow.high.quantity + ")"}</span><br/>
+                        <span className={"high-low"}>{highLow.high.timestamp.slice(0, -3) + " (" + highLow.high.quantity + ")"}</span><br/>
                         <span>Piek</span><br/>
-                        <span className={"high-low"}>{highLow.low.timestamp + " (" + highLow.low.quantity + ")"}</span><br/>
+                        <span className={"high-low"}>{highLow.low.timestamp.slice(0, -3) + " (" + highLow.low.quantity + ")"}</span><br/>
                         <span>Dal</span>
                     </div>
+                    <div className="frame-sections">
+                        {history.length > 0 ?
+                            <>
+                                <span className="trend" id={info.trend < 0 ? "neg-trend" : "pos-trend"}>{info.trend + "%"}</span><br/>
+                                <span>T.o.v. laatste wedstrijd</span>
+                            </>
+                            :
+                            <span>Niet genoeg data voor extra statistieken</span>
+                        }
+                    </div>
+                    <Graph history={info.history}/>
 
                     <div className="frame-sections">
                         <Trend history={info.history} />

@@ -59,5 +59,5 @@ export const Graph = (props: GraphProps) => {
         ],
     };
 
-    return <Line options={options} data={data} />;
+    return history.length > 0 && (<Line options={options} data={data} />);
 }
